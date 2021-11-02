@@ -3,7 +3,7 @@
 class CreateRecipes < ActiveRecord::Migration[6.1]
   def change
     create_table :recipes do |t|
-      t.string :name, null: false, unique: true
+      t.string :name, null: false
       t.string :ingredients, null: false, array: true
       t.string :image, null: true
       t.string :cook_time
@@ -20,7 +20,6 @@ class CreateRecipes < ActiveRecord::Migration[6.1]
       t.tsvector :ingredient_ts_vector
     end
 
-    add_index :recipes, :name, unique: true
     add_index :recipes, :ingredient_ts_vector, using: :gin
   end
 end

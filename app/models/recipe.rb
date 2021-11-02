@@ -3,7 +3,7 @@
 class Recipe < ApplicationRecord
   include PgSearch::Model
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
   validates :ingredients, presence: true
 
   pg_search_scope(
