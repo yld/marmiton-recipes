@@ -10,5 +10,10 @@ AllCops:
     - 'db/migrate/**/*'
   TargetRubyVersion: 2.7
 
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - 'spec/**/*'
+
 Style/Documentation:
   Enabled: false

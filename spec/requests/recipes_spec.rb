@@ -18,14 +18,22 @@ RSpec.describe 'Recipes', type: :request do
   end
 
   describe 'GET /search with search data' do
-    let(:first_tomato_recipe) { create(:recipe, ingredients: ['tomate coupées']) }
-    let(:second_tomato_recipe) { create(:recipe, ingredients: ['tomate pelée']) }
+    before do
+      create(:recipe, ingredients: ['tomate coupées'])
+      create(:recipe, ingredients: ['tomate pelée'])
+    end
 
     context 'when searching for tomates' do
       it 'returns 2 results' do
         get '/recipes/search.json?search=tomates'
-        binding.pry
         expect(parsed_response.size).to eq(2)
+      end
+    end
+
+    context 'when searching for muscade' do
+      it 'returns 2 results' do
+        get '/recipes/search.json?search=muscade'
+        expect(parsed_response.size).to eq(0)
       end
     end
   end
