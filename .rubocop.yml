@@ -1,0 +1,14 @@
+---
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'bin/*'
+    - 'db/migrate/**/*'
+  TargetRubyVersion: 2.7
+
+Style/Documentation:
+  Enabled: false
