@@ -4,7 +4,7 @@ class CreateRecipesTsvector < ActiveRecord::Migration[6.1]
     execute <<-SQL
       CREATE function upsert_recipe_tsvector() RETURNS trigger as $$
       BEGIN
-        NEW.ingredient_ts_vector := to_tsvector('simple'::regconfig, array_to_string(NEW.ingredients, ''));
+        NEW.ingredient_ts_vector := to_tsvector('simple'::regconfig, unaccent(array_to_string(NEW.ingredients, '')));
         RETURN NEW;
       END
       $$ LANGUAGE plpgsql;

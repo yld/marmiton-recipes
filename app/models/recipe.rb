@@ -12,7 +12,8 @@ class Recipe < ApplicationRecord
     ignoring: :accents,
     using: {
       tsearch: {
-        dictionary: 'french',
+        prefix: true,
+        dictionary: :french,
         tsvector_column: 'ingredient_ts_vector'
       }
     }

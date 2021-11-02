@@ -2,9 +2,8 @@
 
 FactoryBot.define do
   factory :recipe do
-    name { 'MyString' }
-    ingrdients { 'MyString' }
-    steps { 'MyString' }
+    name { Faker::Lorem.sentence }
+    ingredients { 'MyString' }
     image { 'MyString' }
     cook_time { 'MyString' }
     prep_time { 'MyString' }

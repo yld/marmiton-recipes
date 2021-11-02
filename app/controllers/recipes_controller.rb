@@ -2,12 +2,12 @@
 
 class RecipesController < ApplicationController
   def search
-    @results = Recipes.search(search_params['search'])
+    @results = search_params.key?('search') ? Recipe.search(search_params['search']) : []
   end
 
   private
 
   def search_params
-    params.require(:search)
+    params.permit(:search)
   end
 end
