@@ -9,8 +9,20 @@ RSpec.describe Recipe, type: :model do
   end
 
   describe '#search' do
-    let!(:first_tomato_recipe) { create(:recipe, ingredients: ['tomate coupées']) }
-    let!(:second_tomato_recipe) { create(:recipe, ingredients: ['tomate pelée']) }
+    let!(:first_tomato_recipe) { create(:recipe, name: 'ABC', ingredients: ['tomates coupées']) }
+    let!(:second_tomato_recipe) { create(:recipe, name: 'DEF', ingredients: ['tomates pelée']) }
+
+    context 'when using with_pg_search_rank' do
+      it 'order results by name' do
+        expect(described_class.search('tomates').with_pg_search_rank.first).to eq(first_tomato_recipe)
+      end
+    end
+
+    context 'when searching for tomates and pommes' do
+      it 'returns 2 results' do
+        expect(described_class.search('tomates pommes')).to contain_exactly(first_tomato_recipe, second_tomato_recipe)
+      end
+    end
 
     context "when searching for 'tomates'" do
       it 'returns 2 results' do
